@@ -5,12 +5,12 @@ import org.springframework.data.domain.Pageable
 
 class Paginating(
     var page: Int = 0,
-    var sort: String = "+id",
+    var sort: String = "asc-id",
     var limit: Int = 3
 ) {
 
     fun getPageable(): Pageable {
-        return PageRequest.of(page, limit, SortConverter.parse(sort))
+        return PageRequest.of(page, limit, SortConverter.parse(sort, "-"))
     }
 
 }

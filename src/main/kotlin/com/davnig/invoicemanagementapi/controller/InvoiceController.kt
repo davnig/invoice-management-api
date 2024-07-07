@@ -20,6 +20,7 @@ class InvoiceController(
         @RequestParam(required = false) search: String?,
         @RequestParam(required = false) fields: List<String>?
     ): ResponseEntity<Page<InvoiceSummary>> {
+        println(paginating.sort)
         return when {
             (search != null && fields != null) ->
                 ResponseEntity.ok(invoiceService.findAll(paginating, search, fields))
