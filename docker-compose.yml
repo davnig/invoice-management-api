@@ -1,0 +1,23 @@
+services:
+  
+  db:
+    image: postgres
+    container_name: invoice-management-db
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  api:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: invoice-management-api
+    depends_on:
+      - db
+    ports:
+      - 9044:8080
